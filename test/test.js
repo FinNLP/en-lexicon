@@ -11,6 +11,11 @@ describe('Basic tests', function () {
 	it('Extend is a function', function () {
 		assert.equal(typeof lexicon.extend,"function");
 	});
+	it('word count', function () {
+		const count = Object.keys(lexicon.lexicon).length;
+		this.test.title = `There is ${count} words in the lexicon`;
+		assert.equal(count>=100000,true);
+	});
 });
 
 describe('Test lexicon object', function () {
@@ -29,7 +34,7 @@ describe('Test lexicon object', function () {
 	it('Get a word\'s infinitive that has been added after conjugation', function () {
 		assert.equal(lexicon.lexicon.animating.infinitive,"animate");
 	});
-	it('Test emojis sentiment', function () {
+	it('Test Emojis sentiment', function () {
 		assert.equal(lexicon.lexicon["💑"].sentiment,1);
 	});
 });
