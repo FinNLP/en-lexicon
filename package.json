@@ -1,0 +1,37 @@
+{
+  "name": "en-lexicon",
+  "version": "1.0.0",
+  "description": "extensible english language lexicon with sentiment scoring and POS tags",
+  "main": "lexicon/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/test"
+  },
+  "keywords": [
+    "lexicon",
+    "english",
+    "sentiment",
+    "pos",
+    "tags"
+  ],
+  "author": "Alex Corvi <alex@arrayy.com>",
+  "license": "MIT",
+  "dependencies": {
+    "en-inflectors": "^1.0.1",
+    "spelling-variations": "^1.0.2"
+  },
+  "devDependencies": {
+    "afinn-165": "^1.0.0",
+    "emojilib": "^2.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcorvi/en-lexicon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexcorvi/en-lexicon/issues"
+  },
+  "homepage": "https://github.com/alexcorvi/en-lexicon#readme"
+}
