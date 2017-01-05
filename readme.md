@@ -1,132 +1,113 @@
-# English Inflectors Library
-For noun (plural to singular and singular to plural) and verb (gerund, present & past) transformations.
-
-### How accurate is it?
-
-First of all, unless you have a dictionary of all the words and verbs there are in the English you can't really write a regular expression or an algorithm and expect to have a 100% success rate. English has been adopting words form a lot of different languages (French, Greek and Latin for example) and each one these languages has it's own rules of pluralization and singularization.
-
-Even with dictionaries you'll have the problem of complex and made up words like `geo-location`, and you might have to add dictionaries for specialties (like medicine which does actually have it's own dictionary). 
-
-However, I think what you'll find in this library is what can be achieved with the least amount of compromise.
-
-I've used a set of rules (for detection/transformation) in combination with an exceptions list.
-
-However, testing the library was more challenging than what I was anticipating. If you have any case inaccuracy or false positives **please** submit an issue.
-
-And of course, You can clone this repository, install `mocha` and test it for yourself, and you'll see how it passes the 9508 tests successfully.
+# English Lexicon
+Extensible English language lexicon for POS tagging and sentiment scoring with Emojis and around 105K words. 
 
 
 ## Installation
 
 ```
-npm install en-inflectors --save
+npm install en-lexicon --save
 ```
 
 
-## Plural and singular detection
+## Usage
 
 ```javascript
-const inflectors = require("en-inflectors");
-inflectors.isSingular("nuclei");
-// > false
-inflectors.isPlural("plateaux");
-// > true
-inflectors.isCountable("steam");
-// > false
+const lexicon = require("en-lexicon");
+
+console.log(lexicon.lexicon.faraway);
+// result:
+{
+	"pos": "JJ",
+	"sentiment": 0
+}
+
+console.log(lexicon.lexicon["facilitating"]);
+// result:
+{
+	"pos": "VBG",
+	"sentiment": 0,
+	"infinitive": "facilitate"
+}
+
+console.log(lexicon.lexicon.abashing);
+// result:
+{
+	"pos": "VBG",
+	"sentiment": -1,
+	"infinitive": "abash"
+}
 ```
 
-**How it works**:
-- Search for the given word in the uncountable words.
-- Search for the given word against a dictionary of known and common exceptions.
-- Detect the given word against a set of RegExp rules.
+## Extending
 
-> Note: All uncountable words like **sheep**, **deer**, **tuna** and **steam** will return `false` for both plural and singular detection.
+One of the main reason that I had to write my own lexicon module is that I needed it to be extensible. So rest assured that this lexicon is as extensible as it can get and it will apply the same conjugate rules to whatever you pass to it.
 
-## Plural to singular transformation
+To extend the lexion with medical terms for example:
 
 ```javascript
-const inflectors = require("en-inflectors");
-inflectors.pluralize("mouse");
-// > mice
-inflectors.pluralize("goose");
-// > geese
-inflectors.pluralize("river");
-// > rivers
+
+const lexicon = require("en-lexicon");
+
+var myOwnTerms = {
+	lactate:{
+		pos:"VB",
+	},
+	eukaryote:{
+		pos:"NN"
+	},
+	erythrolysing:{
+		pos:"VBG",
+		sentiment:3
+	}
+}
+
+lexicon.extend(myOwnTerms);
 ```
 
-## Singular to plural transformation
-```javascript
-const inflectors = require("en-inflectors");
-inflectors.pluralize("location");
-// > locations
-inflectors.pluralize("hoax");
-// > hoaxes
-inflectors.pluralize("wharf");
-// > wharves
+Now that you've extended the lexicon with your own terms, you won't only get the terms you entered. The lexicon will (try) to be smart and apply some inflections on those terms.
+
+For example:
+
+```
+const lexicon = require("en-lexicon");
+
+// the term you entered
+console.log(lexicon.lexicon.lactate.pos);
+// "VB"
+console.log(lexicon.lexicon.lactated.pos);
+// "VBD"
+console.log(lexicon.lexicon.lactating.pos);
+// "VBG"
+
+// same will apply on "erythrolysing"
+console.log(lexicon.lexicon.erythrolyse.pos);
+// "VBP"
+console.log(lexicon.lexicon.erythrolysed.pos);
+// "VBD"
+
+// the conjugated terms should also have
+// the sentiment you passed for the original term
+console.log(lexicon.lexicon.erythrolysed.sentiment);
+// 3
 ```
 
-**How it works**:
-- Search for the given word in the uncountable words.
-- Search for the given word against a dictionary of known and common exceptions.
-- Apply singularization/pluralization rules.
-
-
-## Verb conjugation
-
-```javascript
-const inflectors = require("en-inflectors");
-inflectors.conjugate("playing","VBP");
-// > play
-inflectors.conjugate("playing","VBZ");
-// plays
-inflectors.conjugate("transcribes","VBP");
-// transcribed
-inflectors.conjugate("goes","VBN");
-// gone
-inflectors.conjugate("went","VBG");
-// going
-```
-
-where:
-
-- VBP: is the present/infinitive form.
-- VBZ: is the present with the third person "s".
-- VBP: is the past form.
-- VBD: is the past participle form.
-- VBG: is the gerund form.
-
-Or you can use the aliases:
+If you're not sure about the sentiment, then pass an array of synonyms and the lexicon will calculate it for you
 
 ```javascript
-const inflectors = require("en-inflectors");
-inflectors.present("playing");
-// > play
-inflectors.presentS("playing");
-// plays
-inflectors.past("transcribes");
-// transcribed
-inflectors.pastParticiple("goes");
-// gone
-inflectors.gerund("went");
-// going
+
+const lexicon = require("en-lexicon");
+lexicon.extend({
+	carcinoma:{
+		pos:"NN",
+		synonyms:["cancer","disease","malignancy","tumor"]
+	}
+});
+
+console.log(lexicon.lexicon.carcinoma.sentiment);
+// -2
+
 ```
 
-
-> Note: for better, more accurate results, pass the verb in it's infinitive form (`go` instead of `goes`). although this library has been written to be agnostic about the form of the inputs, but the test results has proven that it's quite hard to achieve that with full accuracy.
-
-
-## Additional functionalities
-
-```javascript
-const inflectors = require("en-inflectors");
-
-inflectors.uncountableWords;
-// list all the uncountable words as an array
-inflectors.verbsTable;
-// verb table with all the tenses can be used for writing your own functionalities
-inflectors.infinitives;
-// an array of the most common English verbs
-```
 
 ## License
 
