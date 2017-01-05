@@ -1,6 +1,6 @@
 {
   "name": "en-lexicon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "extensible english language lexicon with sentiment scoring and POS tags",
   "main": "lexicon/index.js",
   "directories": {
