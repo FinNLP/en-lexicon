@@ -100,10 +100,7 @@ inflectors.infinitives.forEach((infinitive)=>{
 
 	var sentiment = 0;
 
-	if(result.hasOwnProperty(infinitive)) {
-		if (result[infinitive].pos !== 'VB') result[infinitive].pos = 'VB';
-		sentiment = result[infinitive].sentiment;
-	}
+	if(result.hasOwnProperty(infinitive)) sentiment = result[infinitive].sentiment;
 	else {
 		result[infinitive] = {
 			pos:"VB",
