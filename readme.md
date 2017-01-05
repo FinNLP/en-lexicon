@@ -68,7 +68,7 @@ Now that you've extended the lexicon with your own terms, you won't only get the
 
 For example:
 
-```
+```javascript
 const lexicon = require("en-lexicon");
 
 // the term you entered
