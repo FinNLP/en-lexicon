@@ -9,12 +9,11 @@ const conjugate = require("../lexicon/conjugate.js");
 const getSentimentScore = require("../lexicon/get_sentiment.js");
 
 
-
 /**
  *
  * STEP A:
  * 	Using the source.txt file
- * 	which is an almost compelete lexicon with sentiment scores
+ * 	which is an almost complete lexicon with sentiment scores
  * 	and POS tags
  * 
 **/
@@ -79,7 +78,6 @@ for(var word in afinn165) {
 
 
 
-
 /**
  *
  * STEP C:
@@ -130,8 +128,6 @@ inflectors.infinitives.forEach((infinitive)=>{
 });
 
 
-
-
 /**
  *
  * STEP D:
@@ -151,8 +147,6 @@ for(var item in emoji) {
 		};
 	}
 }
-
-
 
 
 
