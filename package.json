@@ -1,6 +1,6 @@
 {
   "name": "en-lexicon",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "extensible english language lexicon with sentiment scoring and POS tags",
   "main": "lexicon/index.js",
   "directories": {
@@ -28,10 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexcorvi/en-lexicon.git"
+    "url": "git+https://github.com/finnlp/en-lexicon.git"
   },
   "bugs": {
-    "url": "https://github.com/alexcorvi/en-lexicon/issues"
+    "url": "https://github.com/finnlp/en-lexicon/issues"
   },
-  "homepage": "https://github.com/alexcorvi/en-lexicon#readme"
+  "homepage": "https://github.com/finnlp/en-lexicon#readme"
 }
