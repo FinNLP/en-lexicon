@@ -31,20 +31,16 @@ One of the main reason that I had to write my own lexicon module is that I neede
 To extend the lexion with medical terms for example:
 
 ```javascript
-
 const lexicon = require("en-lexicon");
 lexicon.extend({
 	lactate:"VB",
 	serum:"NN"
 });
-```
 
-Now that you've extended the lexicon with your own terms, you won't only get the terms you entered. The lexicon will (try) to be smart and apply some inflections on those terms.
-
-For example:
-
-```javascript
-const lexicon = require("en-lexicon");
+// Now that you've extended the lexicon with your own terms
+// you won't only get the terms you entered
+// The lexicon will (try) to be smart and
+// apply some inflections on those terms
 
 // the term you entered
 console.log(lexicon.lexicon.lactate);
