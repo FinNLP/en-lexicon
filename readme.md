@@ -1,6 +1,5 @@
 # English Lexicon
-Extensible English language lexicon for POS tagging and sentiment scoring with Emojis and around 105K words. 
-
+Extensible English language lexicon for POS tagging with Emojis and around 110K words
 
 ## Installation
 
@@ -12,56 +11,32 @@ npm install en-lexicon --save
 ## Usage
 
 ```javascript
+
 const lexicon = require("en-lexicon");
 
 console.log(lexicon.lexicon.faraway);
-// result:
-{
-	"pos": "JJ",
-	"sentiment": 0
-}
+// "JJ"
 
-console.log(lexicon.lexicon["facilitating"]);
-// result:
-{
-	"pos": "VBG",
-	"sentiment": 0,
-	"infinitive": "facilitate"
-}
+// multiple POS tags are separated by "|"
+console.log(lexicon.lexicon.acquired);
+// "VBN|JJ|VBD"
 
-console.log(lexicon.lexicon.abashing);
-// result:
-{
-	"pos": "VBG",
-	"sentiment": -1,
-	"infinitive": "abash"
-}
 ```
+
 
 ## Extending
 
-One of the main reason that I had to write my own lexicon module is that I needed it to be extensible. So rest assured that this lexicon is as extensible as it can get and it will apply the same conjugate rules to whatever you pass to it.
+One of the main reason that I had to write my own lexicon module is that I needed it to be extensible. 
 
 To extend the lexion with medical terms for example:
 
 ```javascript
 
 const lexicon = require("en-lexicon");
-
-var myOwnTerms = {
-	lactate:{
-		pos:"VB",
-	},
-	eukaryote:{
-		pos:"NN"
-	},
-	erythrolysing:{
-		pos:"VBG",
-		sentiment:3
-	}
-}
-
-lexicon.extend(myOwnTerms);
+lexicon.extend({
+	lactate:"VB",
+	serum:"NN"
+});
 ```
 
 Now that you've extended the lexicon with your own terms, you won't only get the terms you entered. The lexicon will (try) to be smart and apply some inflections on those terms.
@@ -72,42 +47,19 @@ For example:
 const lexicon = require("en-lexicon");
 
 // the term you entered
-console.log(lexicon.lexicon.lactate.pos);
+console.log(lexicon.lexicon.lactate);
 // "VB"
-console.log(lexicon.lexicon.lactated.pos);
-// "VBD"
-console.log(lexicon.lexicon.lactating.pos);
+console.log(lexicon.lexicon.lactated);
+// "VBD|VBN"
+console.log(lexicon.lexicon.lactating);
 // "VBG"
 
-// same will apply on "erythrolysing"
-console.log(lexicon.lexicon.erythrolyse.pos);
-// "VBP"
-console.log(lexicon.lexicon.erythrolysed.pos);
-// "VBD"
-
-// the conjugated terms should also have
-// the sentiment you passed for the original term
-console.log(lexicon.lexicon.erythrolysed.sentiment);
-// 3
 ```
 
-If you're not sure about the sentiment, then pass an array of synonyms and the lexicon will calculate it for you
 
-```javascript
+## Credits
 
-const lexicon = require("en-lexicon");
-lexicon.extend({
-	carcinoma:{
-		pos:"NN",
-		synonyms:["cancer","disease","malignancy","tumor"]
-	}
-});
-
-console.log(lexicon.lexicon.carcinoma.sentiment);
-// -2
-
-```
-
+I've used Eric Brill's lexicon as starting point for this project, manually corrected some cases, and expanded it using various corpora, [this one](https://github.com/dariusk/corpora) and [this one](https://github.com/nibblesoft/dictionary-thesaurus) for example.
 
 ## License
 

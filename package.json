@@ -1,8 +1,8 @@
 {
   "name": "en-lexicon",
-  "version": "1.0.3",
-  "description": "extensible english language lexicon with sentiment scoring and POS tags",
-  "main": "lexicon/index.js",
+  "version": "1.0.4",
+  "description": "Extensible english lexicon with Emoji support",
+  "main": "./lib/index.js",
   "directories": {
     "test": "test"
   },
@@ -19,9 +19,8 @@
   "author": "Alex Corvi <alex@arrayy.com>",
   "license": "MIT",
   "dependencies": {
-    "en-inflectors": "^1.0.1",
-    "spelling-variations": "^1.0.2"
-  },
+    "en-inflectors": "^1.0.1"
+    },
   "devDependencies": {
     "afinn-165": "^1.0.0",
     "emojilib": "^2.0.3"
