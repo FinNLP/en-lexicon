@@ -5,7 +5,12 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "outDir": "./dist/",
-        "declaration":true
+        "declaration":true,
+        "strictNullChecks":true,
+        "alwaysStrict":true,
+        "forceConsistentCasingInFileNames":true,
+        "listEmittedFiles":true,
+        "pretty":true
     },
     "files": [
         "./src/index.ts"
