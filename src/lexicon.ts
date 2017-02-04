@@ -1,4 +1,8 @@
-{
+export interface LexiconType {
+  [key:string]:string
+}
+
+const lexicon = <LexiconType> {
   "!": "!",
   "#": "#",
   "...": ":",
@@ -111976,3 +111980,5 @@
   "🇿🇲": "EM",
   "🇿🇼": "EM"
 }
+
+export default lexicon;

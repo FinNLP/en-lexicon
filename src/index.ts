@@ -1,32 +1,24 @@
-var JSONL = require("./lexicon.json");
-const inflectors = require('en-inflectors');
+import inflectors = require("en-inflectors");
+const Inflectors = inflectors.Inflectors;
+import JSONL from './lexicon';
+import {LexiconType as LexiconType} from "./lexicon";
+
 const lexicon = {
 	lexicon:JSONL,
-
-
-	/**
-	 * Extension function should be given
-	 * an object where the key is the word
-	 * and the value can be a String (POS tag)
-	 * or an object:
-	 * pos:"VB",
-	 * synonyms:["something"],
-	 * 
-	**/
-	extend:function(terms,a,b,c){
+	extend:function(terms:LexiconType):undefined{
 		if(typeof terms !== "object" || terms === null) {
 			console.warn("You must pass an object to extend the lexicon");
 			return;
 		}
-		for(var term in terms) {
+		for(let term in terms) {
 			if(!terms.hasOwnProperty(term)) continue;
 			if(!terms[term]) continue;
 
 			if(~terms[term].split("|").indexOf("VB")||~terms[term].split("|").indexOf("VBP")) {
-				var VBZ = inflectors.conjugate(term,"VBZ");
-				var VBD = inflectors.conjugate(term,"VBD");
-				var VBN = inflectors.conjugate(term,"VBN");
-				var VBG = inflectors.conjugate(term,"VBG");
+				let VBZ = new Inflectors(term).conjugate("VBZ");
+				let VBD = new Inflectors(term).conjugate("VBD");
+				let VBN = new Inflectors(term).conjugate("VBN");
+				let VBG = new Inflectors(term).conjugate("VBG");
 				
 				if(!terms[VBZ]) terms[VBZ] = "VBZ";
 				else terms[VBZ] = terms[VBZ] + "|" + "VBZ";
@@ -41,8 +33,8 @@ const lexicon = {
 				else terms[VBG] = terms[VBG] + "|" + "VBG";
 			}
 		}
-		JSONL = Object.assign(JSONL,terms);
+		for (let newEntry in terms) {lexicon.lexicon[newEntry] = terms[newEntry];}
 	}
 };
 
-module.exports = lexicon;
+export {lexicon}
