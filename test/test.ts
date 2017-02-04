@@ -1,4 +1,4 @@
-const lexicon = require("../lib/index.js");
+const lexicon = require("../dist/index.js");
 const assert = require("assert");
 
 describe('Basic tests', function () {
