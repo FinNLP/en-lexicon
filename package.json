@@ -2,7 +2,8 @@
   "name": "en-lexicon",
   "version": "1.0.6",
   "description": "Extensible english lexicon with Emoji support",
-  "main": "./lib/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "directories": {
     "test": "test"
   },
@@ -19,8 +20,8 @@
   "author": "Alex Corvi <alex@arrayy.com>",
   "license": "MIT",
   "dependencies": {
-    "en-inflectors": "^1.0.1"
-    },
+    "en-inflectors": "^1.0.7"
+  },
   "devDependencies": {
     "afinn-165": "^1.0.0",
     "emojilib": "^2.0.3"
