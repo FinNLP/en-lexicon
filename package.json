@@ -8,7 +8,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/test"
+    "prepublish":"mocha && tsc",
+    "build":"tsc",
+    "test": "mocha"
   },
   "keywords": [
     "lexicon",
