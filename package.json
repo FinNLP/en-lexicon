@@ -1,6 +1,6 @@
 {
   "name": "en-lexicon",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Extensible english lexicon with Emoji support",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
