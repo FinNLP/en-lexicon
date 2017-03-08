@@ -1,5 +1,5 @@
 import inflectors = require("en-inflectors"); const Inflectors = inflectors.Inflectors;
-import {LexiconType as LexiconType} from "./lexicon";
+import {LexiconType} from "./lexicon";
 import lexicon from './lexicon';
 
 const extend = function(terms:LexiconType):undefined{
@@ -31,6 +31,6 @@ const extend = function(terms:LexiconType):undefined{
 		}
 	}
 	for (let newEntry in terms) {lexicon[newEntry] = terms[newEntry];}
-}
+};
 
 export {lexicon,extend}
