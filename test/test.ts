@@ -1,5 +1,8 @@
-const lexicon = require("../dist/index.js");
+/// <reference path="../node_modules/@types/node/index.d.ts"/>
+/// <reference path="../node_modules/@types/mocha/index.d.ts"/>
 const assert = require("assert");
+
+import * as lexicon from "../src/index";
 
 describe('Basic tests', function () {
 	it('Lexicon is an object', function () {
@@ -13,15 +16,15 @@ describe('Basic tests', function () {
 	});
 	it('word count', function () {
 		const count = Object.keys(lexicon.lexicon).length;
-		this.test.title = `There is ${count} words in the lexicon`;
+		(this as any).test.title = `There is ${count} words in the lexicon`;
 		assert.equal(count>=100000,true);
 	});
 });
 
 describe('Test lexicon object', function () {
 	it('Get word pos tags', function () {
-		assert.equal(typeof lexicon.lexicon.show,"string");
-		assert.equal(lexicon.lexicon.objective,"NN|JJ");
+		assert.equal(typeof lexicon.lexicon["show"],"string");
+		assert.equal(lexicon.lexicon["objective"],"NN|JJ");
 	});
 });
 
@@ -30,7 +33,7 @@ describe('Extensibility', function () {
 	var newTerms = {
 		"indoor-derelocate":"VBP|VB",
 		"small-defeather-margined":"JJ"
-	}
+	};
 
 	lexicon.extend(newTerms);
 
