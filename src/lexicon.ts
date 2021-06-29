@@ -2,7 +2,7 @@ export interface LexiconType {
   [key:string]:string
 }
 
-const lexicon = <LexiconType> {
+const lexicon = <LexiconType> Object.assign(Object.create(null), {
   "!": "!",
   "#": "#",
   "...": ":",
@@ -111980,6 +111980,6 @@ const lexicon = <LexiconType> {
   "🇾🇪": "EM",
   "🇿🇲": "EM",
   "🇿🇼": "EM"
-}
+});
 
 export default lexicon;
